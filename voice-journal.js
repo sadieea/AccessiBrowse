@@ -7,7 +7,7 @@ const voiceStatusText = document.getElementById('record-status');
 const entriesContainer = document.getElementById('entries-container');
 
 // --- 2. SETUP THE AI ---
-let model; // Model is now loaded on demand
+let model;
 
 async function initializeAI() {
     if (model) return true;
@@ -51,7 +51,7 @@ async function loadEntries() {
 }
 
 // --- 5. VOICE RECORDING LOGIC (PIVOTED) ---
-// (Your existing logic using SpeechRecognition is great)
+
 function runSpeechRecognition() {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (!SpeechRecognition) {
@@ -129,4 +129,5 @@ voiceEntryBtn.addEventListener('click', () => {
 
 // --- 6. INITIALIZE ---
 loadEntries();
-initializeAI(); // Try to init AI on load
+
+initializeAI(); 
