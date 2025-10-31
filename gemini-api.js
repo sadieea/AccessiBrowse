@@ -21,7 +21,7 @@ async function getApiKey() {
 
 /**
  * Initializes and returns a Gemini generative model.
- * @param {string} modelName - The model to use (e.g., "gemini-1.5-flash-latest").
+ * @param {string} modelName - The model to use 
  * @returns {Promise<object>} The Gemini GenerativeModel object.
  */
 export async function getGeminiModel(modelName = "gemini-2.5-flash") {
