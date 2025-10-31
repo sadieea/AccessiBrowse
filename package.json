@@ -1,0 +1,13 @@
+{
+  "name": "accessibrowse-suite",
+  "version": "1.0.0",
+  "description": "A hybrid AI accessibility suite for Chrome.",
+  "private": true,
+  "scripts": {
+    "build:css": "npx tailwindcss -i ./input.css -o ./tailwind.css",
+    "watch:css": "npx tailwindcss -i ./input.css -o ./tailwind.css --watch"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.1"
+  }
+}
