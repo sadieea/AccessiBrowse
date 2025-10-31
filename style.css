@@ -1,0 +1,121 @@
+/* ====== Global AccessiBrowse Theme ====== */
+:root {
+  --bg-color: #0d1117;          /* Deep dark background */
+  --sidebar-bg: #111820;        /* Slightly lighter for sidebar contrast */
+  --card-bg: #161b22;           /* Card containers */
+  --accent-color: #2f81f7;      /* Primary blue (buttons, highlights) */
+  --accent-hover: #1f6feb;
+  --text-primary: #f0f6fc;      /* Main text color */
+  --text-secondary: #8b949e;    /* Muted text */
+  --border-color: #30363d;
+  --font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+}
+
+/* ====== Universal Reset ====== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  font-family: var(--font-family);
+  line-height: 1.6;
+}
+
+/* ====== Sidebar ====== */
+.sidebar {
+  background-color: var(--sidebar-bg);
+  color: var(--text-secondary);
+}
+
+.sidebar a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  border-radius: 8px;
+  transition: background 0.3s;
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+  background-color: var(--accent-color);
+  color: #ffffff;
+}
+
+/* ====== Headings ====== */
+h1, h2, h3, h4, h5 {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* ====== Cards (used in recent entries, search results, etc.) ====== */
+.card {
+  background-color: var(--card-bg);
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-bottom: 16px;
+  border: 1px solid var(--border-color);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+/* ====== Buttons ====== */
+button,
+.btn {
+  background-color: var(--accent-color);
+  color: #ffffff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+button:hover,
+.btn:hover {
+  background-color: var(--accent-hover);
+}
+
+/* ====== Text Area (Writer’s Hub) ====== */
+textarea {
+  background-color: var(--card-bg);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 12px;
+  width: 100%;
+  resize: none;
+}
+
+/* ====== Minor UI elements ====== */
+input, select {
+  background-color: var(--card-bg);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 8px 12px;
+}
+
+a {
+  color: var(--accent-color);
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* ====== Accessibility: Focus ====== */
+:focus {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
+}

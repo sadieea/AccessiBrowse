@@ -1,0 +1,65 @@
+{
+  "manifest_version": 3,
+  "name": "AccessiBrowse Suite",
+  "version": "1.0",
+  "description": "A hybrid AI accessibility suite with a private, on-device dashboard.",
+
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting",
+    "sidePanel",
+    "contextMenus",
+    "tts",
+    "commands"
+  ],
+
+  "host_permissions": [
+    "httpsE_THIS://generativelanguage.googleapis.com/",
+    "<all_urls>"
+  ],
+
+  "background": {
+    "service_worker": "service-worker.js",
+    "type": "module"
+  },
+
+  "action": {
+    "default_title": "Open AccessiBrowse Dashboard"
+  },
+
+  "side_panel": {
+    "default_path": "sidepanel.html"
+  },
+
+  "contextMenus": [
+    {
+      "id": "describe-image",
+      "title": "AccessiBrowse: Describe this image",
+      "contexts": ["image"]
+    }
+  ],
+  
+  "commands": {
+    "summarize-page": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+S"
+      },
+      "description": "Summarize the current page"
+    },
+    "describe-page": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+R"
+      },
+      "description": "Describe the page layout"
+    }
+  },
+
+  "options_page": "options.html",
+
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  }
+}

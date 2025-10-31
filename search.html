@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AccessiBrowse - AI Query</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+                        "primary": "#3498DB",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#121212",
+                        "card-dark": "#1E1E1E",
+                        "text-light": "#E0E0E0",
+                        "text-secondary": "#888888",
+                        "journal-accent": "#9B59B6",
+                        "web-accent": "#3498DB",
+                        "image-accent": "#2ECC71"
+          },
+          fontFamily: {
+            "display": ["Inter", "sans-serif"]
+          },
+          borderRadius: {
+            "DEFAULT": "1rem",
+            "lg": "1.5rem",
+            "xl": "2rem",
+            "full": "9999px"
+          },
+        },
+      },
+    }
+  </script> 
+<script src="https://sdk.gemini.ai/v1.5/gemini-web.js"></script>
+<script src="gemini.js"></script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings:
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24
+    }
+  </style> 
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark">
+<div class="relative flex h-auto min-h-screen w-full flex-row">
+<!-- SideNavBar -->
+<aside class="flex h-screen w-64 flex-col border-r border-white/10 bg-background-light dark:bg-background-dark p-4 sticky top-0">
+<div class="flex flex-col gap-4">
+<div class="flex items-center gap-3">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="User profile picture, abstract purple and blue gradient" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA0EjonBxL4WxzyrytPYwBa3VQb-qbaNUjlSxpvnldLRd9tiRkHQ8UdKSGvzAwpkbl5uVWZ_51y8ujFcrt0hf5vg8xcxS3SN-8RFmKTJnj1jnn3ZYSAeR3k9QD5KnA7wMmDpSw72LFhAwmSCtFXgLZInlPvxsXGtrHEsBeK10pdTFNY0TQc8MTRJg1T5C7j1M3LnbD5K9fiJQhrFgXFuiSfwf8jJG85KzJOSw2krSywOVdW7fOeWidqLaHMyzrhLPpxQHzGQPnXNfM");'></div>
+<div class="flex flex-col">
+<h1 class="text-slate-900 dark:text-white text-base font-medium leading-normal">Alex Duran</h1>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-normal leading-normal">AccessiBrowse</p>
+</div>
+</div>
+</div>
+<nav class="flex flex-col gap-2 mt-6 flex-grow">
+<a class="flex items-center gap-3 px-3 py-2 rounded-full text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors" href="dashboard.html">
+<span class="material-symbols-outlined">home</span>
+<p class="text-sm font-medium leading-normal">Home</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-full bg-primary/20 text-primary" href="search.html">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<p class="text-sm font-medium leading-normal">Search</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-full text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors" href="voice-journal.html">
+<span class="material-symbols-outlined">edit_note</span>
+<p class="text-sm font-medium leading-normal">Voice Entry</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-full text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors" href="writer.html">
+<span class="material-symbols-outlined">edit_note</span>
+<p class="text-sm font-medium leading-normal">Writer's Hub</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-text-light hover:bg-white/10 transition-colors" href="#">
+        <span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 0">settings</span>
+        <p class="text-sm font-medium leading-normal">Settings</p>
+    </a>
+</nav>
+<div class="flex flex-col gap-1">
+<button class="flex w-full cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-wide hover:bg-primary/90 transition-colors">
+<span class="truncate">New Memory</span>
+</button>
+<div class="mt-4 flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded-full text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<p class="text-sm font-medium leading-normal">Settings</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-full text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">help_center</span>
+<p class="text-sm font-medium leading-normal">Help Center</p>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 p-8">
+<div class="mx-auto max-w-4xl">
+<!-- PageHeading -->
+<div class="flex flex-wrap justify-between gap-3 mb-6">
+<div class="flex min-w-72 flex-col gap-2">
+<p class="text-slate-900 dark:text-white text-4xl font-black leading-tight tracking-tighter">AI Query</p>
+<p class="text-slate-500 dark:text-slate-400 text-base font-normal leading-normal">Search across all your notes, journals, and summaries with your private AI.</p>
+</div>
+</div>
+<!-- SearchBar -->
+<div class="py-3">
+<div class="relative flex flex-col min-w-40 w-full">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-14">
+<div class="text-slate-500 dark:text-slate-400 flex bg-white dark:bg-slate-800/50 items-center justify-center pl-4 rounded-l-lg border-y border-l border-slate-300 dark:border-slate-700">
+<span class="material-symbols-outlined text-2xl">search</span>
+</div>
+<input id="search-input" class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-r-lg text-slate-900 dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary focus:border-primary border-y border-r border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800/50 h-full placeholder:text-slate-500 dark:placeholder:text-slate-400 px-4 pl-2 text-base font-normal leading-normal" placeholder="Ask your private AI... (e.g., 'Find my notes about the tech article')" value=""/>
+</div>
+</div>
+</div>
+<!-- Chips -->
+<div class="flex gap-3 pt-3 flex-wrap">
+<button class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-slate-200 dark:bg-slate-800 px-4 hover:bg-slate-300 dark:hover:bg-slate-700 transition-colors">
+<p class="text-slate-700 dark:text-slate-300 text-sm font-medium leading-normal">My journal entries</p>
+</button>
+<button class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-slate-200 dark:bg-slate-800 px-4 hover:bg-slate-300 dark:hover:bg-slate-700 transition-colors">
+<p class="text-slate-700 dark:text-slate-300 text-sm font-medium leading-normal">Summaries from this week</p>
+</button>
+<button class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-slate-200 dark:bg-slate-800 px-4 hover:bg-slate-300 dark:hover:bg-slate-700 transition-colors">
+<p class="text-slate-700 dark:text-slate-300 text-sm font-medium leading-normal">Notes about 'finance'</p>
+</button>
+</div>
+<div id="results-container" class="mt-6"></div>
+<!-- SectionHeader -->
+<h2 class="text-slate-900 dark:text-white text-2xl font-bold leading-tight tracking-tight px-1 pb-3 pt-10">Results</h2>
+<!-- Memory Cards -->
+<div class="grid grid-cols-1 gap-6">
+<!-- Memory Card 1 -->
+<div class="flex flex-col gap-4 rounded-lg bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 p-6 hover:border-primary/50 dark:hover:border-primary/50 transition-all cursor-pointer">
+<div class="flex flex-col gap-2">
+<h3 class="text-slate-900 dark:text-white text-lg font-bold leading-snug tracking-tight">Tech Article: The Rise of AI Agents</h3>
+<p class="text-slate-600 dark:text-slate-400 text-sm font-normal leading-relaxed line-clamp-2">A deep dive into how autonomous AI agents are reshaping industries, from software development to automated customer service. Key takeaways include the importance of ethical frameworks and the potential for exponential productivity gains...</p>
+</div>
+<div class="flex justify-between items-center text-slate-500 dark:text-slate-500 text-xs font-medium">
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base">calendar_today</span>
+<span>June 12, 2024</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base">label</span>
+<span>Tech, AI, Future</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-1.5 rounded-full hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors" data-alt="Copy content">
+<span class="material-symbols-outlined text-lg">content_copy</span>
+</button>
+<button class="p-1.5 rounded-full hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors" data-alt="Share link">
+<span class="material-symbols-outlined text-lg">share</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Memory Card 2 -->
+<div class="flex flex-col gap-4 rounded-lg bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 p-6 hover:border-primary/50 dark:hover:border-primary/50 transition-all cursor-pointer">
+<div class="flex flex-col gap-2">
+<h3 class="text-slate-900 dark:text-white text-lg font-bold leading-snug tracking-tight">Journal Entry: Project Phoenix Update</h3>
+<p class="text-slate-600 dark:text-slate-400 text-sm font-normal leading-relaxed line-clamp-2">This week was a major milestone for Project Phoenix. We successfully integrated the new payment API, which was a huge technical hurdle. Team morale is high, though we need to keep an eye on the upcoming deadline for the beta release. I'm feeling optimistic about our progress.</p>
+</div>
+<div class="flex justify-between items-center text-slate-500 dark:text-slate-500 text-xs font-medium">
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base">calendar_today</span>
+<span>June 10, 2024</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base">edit_note</span>
+<span>Journal</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-1.5 rounded-full hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors" data-alt="Copy content">
+<span class="material-symbols-outlined text-lg">content_copy</span>
+</button>
+<button class="p-1.5 rounded-full hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors" data-alt="Share link">
+<span class="material-symbols-outlined text-lg">share</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Memory Card 3 -->
+<div class="flex flex-col gap-4 rounded-lg bg-white dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 p-6 hover:border-primary/50 dark:hover:border-primary/50 transition-all cursor-pointer">
+<div class="flex flex-col gap-2">
+<h3 class="text-slate-900 dark:text-white text-lg font-bold leading-snug tracking-tight">Finance Planning Notes Q3 2024</h3>
+<p class="text-slate-600 dark:text-slate-400 text-sm font-normal leading-relaxed line-clamp-2">Key points for the Q3 financial review: 1) Analyze subscription churn rate from last quarter. 2) Re-evaluate marketing spend on social media channels. 3) Propose new budget allocation for R&amp;D based on the Project Phoenix roadmap. Need to prepare slides for the meeting next Friday.</p>
+</div>
+<div class="flex justify-between items-center text-slate-500 dark:text-slate-500 text-xs font-medium">
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base">calendar_today</span>
+<span>June 9, 2024</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base">label</span>
+<span>Finance, Planning, Q3</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-1.5 rounded-full hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors" data-alt="Copy content">
+<span class="material-symbols-outlined text-lg">content_copy</span>
+</button>
+<button class="p-1.5 rounded-full hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors" data-alt="Share link">
+<span class="material-symbols-outlined text-lg">share</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<script type="module" src="search.js"></script>
+</body></html>

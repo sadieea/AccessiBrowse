@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AccessiBrowse Panel</title>
+    <style>
+        body { font-family: sans-serif; padding: 10px; }
+        button { width: 100%; padding: 8px; margin-bottom: 8px; }
+        #output { margin-top: 10px; white-space: pre-wrap; }
+        /* Add this error style */
+        #error-output { color: red; margin-top: 10px; white-space: pre-wrap; }
+    </style>
+</head>
+<body>
+    <button id="summarize-btn">Summarize Page</button>
+    <button id="describe-page-btn">Describe Visuals</button>
+    <hr>
+    <div id="error-output"></div> 
+    <div id="output"></div>
+    <button id="save-btn" style="display:none;">Save to Dashboard</button>
+    
+    <script type="module" src="sidepanel.js"></script>
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AccessiBrowse Private AI Hub</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+<script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+                        "primary": "#3498DB",
+                        "background-light": "#f6f6f8",
+                        "background-dark": "#121212",
+                        "card-dark": "#1E1E1E",
+                        "text-light": "#E0E0E0",
+                        "text-secondary": "#888888",
+                        "journal-accent": "#9B59B6",
+                        "web-accent": "#3498DB",
+                        "image-accent": "#2ECC71"
+            },
+            fontFamily: {
+              "display": ["Inter", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<script src="https://sdk.gemini.ai/v1.5/gemini-web.js"></script>
+<script src="gemini-api.js"></script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<link rel="stylesheet" href="style.css">
+
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display">
+<div class="relative flex h-auto min-h-screen w-full flex-col">
+<div class="flex h-full min-h-screen">
+<!-- SideNavBar -->
+<aside class="flex w-64 flex-col bg-[#111c22] p-4">
+<div class="flex flex-col gap-4">
+<div class="flex items-center gap-3">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="User profile picture with a colorful abstract pattern" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA0EjonBxL4WxzyrytPYwBa3VQb-qbaNUjlSxpvnldLRd9tiRkHQ8UdKSGvzAwpkbl5uVWZ_51y8ujFcrt0hf5vg8xcxS3SN-8RFmKTJnj1jnn3ZYSAeR3k9QD5KnA7wMmDpSw72LFhAwmSCtFXgLZInlPvxsXGtrHEsBeK10pdTFNY0TQc8MTRJg1T5C7j1M3LnbD5K9fiJQhrFgXFuiSfwf8jJG85KzJOSw2krSywOVdW7fOeWidqLaHMyzrhLPpxQHzGQPnXNfM");'></div>
+<div class="flex flex-col">
+<h1 class="text-white text-base font-medium leading-normal">Alex Doe</h1>
+<p class="text-[#92b7c9] text-sm font-normal leading-normal">AccessiBrowse</p>
+</div>
+</div>
+<nav class="flex flex-col gap-2 mt-4">
+<a class="flex items-center gap-3 px-3 py-2 text-white hover:bg-[#233c48] rounded-full" href="dashboard.html">
+<span class="material-symbols-outlined">home</span>
+<p class="text-sm font-medium leading-normal">Home</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-white hover:bg-[#233c48] rounded-full" href="search.html">
+<span class="material-symbols-outlined">search</span>
+<p class="text-sm font-medium leading-normal">Search</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-full bg-[#233c48] text-white" href="voice-journal.html">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">mic</span>
+<p class="text-sm font-medium leading-normal">Voice Entry</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-white hover:bg-[#233c48] rounded-full" href="writer.html">
+<span class="material-symbols-outlined">edit_note</span>
+<p class="text-sm font-medium leading-normal">Writer's Hub</p>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-white hover:bg-[#233c48] rounded-full" href="#">
+<span class="material-symbols-outlined">settings</span>
+<p class="text-sm font-medium leading-normal">Settings</p>
+</a>
+</nav>
+</div>
+<div class="mt-auto">
+<a class="flex items-center gap-3 px-3 py-2 text-white hover:bg-[#233c48] rounded-full" href="#">
+<span class="material-symbols-outlined">logout</span>
+<p class="text-sm font-medium leading-normal">Log Out</p>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 overflow-y-auto">
+<div class="mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-8">
+<!-- Recording Section -->
+<section class="flex flex-col items-center justify-center text-center py-16">
+<p class="text-white text-base font-normal leading-normal pb-6 pt-1 px-4">Start New Voice Entry. Press Enter to activate.</p>
+<button class="relative flex h-40 w-40 cursor-pointer items-center justify-center rounded-full bg-gradient-to-br from-[#1a2c36] to-[#0e161b] shadow-[8px_8px_16px_#0b1115,-8px_-8px_16px_#15272f] transition-all hover:shadow-[6px_6px_12px_#0b1115,-6px_-6px_12px_#15272f] active:shadow-inner active:shadow-[#0b1115]">
+<span class="material-symbols-outlined text-white" style="font-size: 72px;">mic</span>
+</button>
+</section>
+<!-- Transcription Feed -->
+<section class="mt-8">
+<h3 class="text-white text-lg font-bold leading-tight tracking-[-0.015em] px-4 pb-4 pt-4">Recent Entries</h3>
+<div class="flex flex-col gap-4">
+<!-- Card 1 -->
+<div class="bg-[#1a2c36]/50 rounded-lg p-6">
+<div class="flex items-start justify-between gap-6">
+<div class="flex flex-[2_2_0px] flex-col gap-3">
+<div class="flex flex-col gap-1">
+<p class="text-white text-base font-medium leading-tight">This is the primary text in English, which is clear and prominent.</p>
+<p class="text-[#92b7c9] text-sm font-normal leading-normal">Este es el texto original en español, que está ligeramente atenuado.</p>
+</div>
+<button class="flex w-fit max-w-[480px] cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-full bg-[#233c48] px-4 py-1.5 text-sm font-medium leading-normal text-white hover:bg-[#304d5c]">
+<span class="material-symbols-outlined text-lg">play_circle</span>
+<span class="truncate">Play</span>
+</button>
+</div>
+<div class="text-sm text-[#92b7c9] whitespace-nowrap">Today, 2:45 PM</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-[#1a2c36]/50 rounded-lg p-6">
+<div class="flex items-start justify-between gap-6">
+<div class="flex flex-[2_2_0px] flex-col gap-3">
+<div class="flex flex-col gap-1">
+<p class="text-white text-base font-medium leading-tight">Exploring the latest accessibility features in modern web development.</p>
+<p class="text-[#92b7c9] text-sm font-normal leading-normal">Explorant les dernières fonctionnalités d'accessibilité dans le développement web moderne.</p>
+</div>
+<button class="flex w-fit max-w-[480px] cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-full bg-[#233c48] px-4 py-1.5 text-sm font-medium leading-normal text-white hover:bg-[#304d5c]">
+<span class="material-symbols-outlined text-lg">play_circle</span>
+<span class="truncate">Play</span>
+</button>
+</div>
+<div class="text-sm text-[#92b7c9] whitespace-nowrap">Yesterday, 9:12 AM</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-[#1a2c36]/50 rounded-lg p-6">
+<div class="flex items-start justify-between gap-6">
+<div class="flex flex-[2_2_0px] flex-col gap-3">
+<div class="flex flex-col gap-1">
+<p class="text-white text-base font-medium leading-tight">What are the core principles of privacy-centric AI?</p>
+<p class="text-[#92b7c9] text-sm font-normal leading-normal">Was sind die Kernprinzipien einer datenschutzorientierten KI?</p>
+</div>
+<button class="flex w-fit max-w-[480px] cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-full bg-[#233c48] px-4 py-1.5 text-sm font-medium leading-normal text-white hover:bg-[#304d5c]">
+<span class="material-symbols-outlined text-lg">play_circle</span>
+<span class="truncate">Play</span>
+</button>
+</div>
+<div class="text-sm text-[#92b7c9] whitespace-nowrap">Oct 28, 11:30 PM</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+</div>
+</div>
+<script type="module" src="voice-journal.js"></script>
+</body></html>
