@@ -56,13 +56,11 @@ function renderMemory(item) {
 }
 
 // Initial load when the page opens
-
-// --- ADD THIS TO THE END OF dashboard.js ---
-
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   // Listen for the refresh message from the service worker or side panel
   if (request.action === 'newMemory') {
     console.log("New memory saved, refreshing dashboard...");
     loadMemories(); // Re-run the function to load all memories
   }
+
 });
