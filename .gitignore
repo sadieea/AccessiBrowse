@@ -1,0 +1,9 @@
+# Do not upload your API key settings
+options.js
+options.html
+
+# Ignore node modules (if you used npm)
+node_modules/
+
+# Ignore system files
+.DS_Store
