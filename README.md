@@ -19,8 +19,8 @@ AccessiBrowse solves this by acting as a "visual and cognitive layer" for the br
 ## Core Features
 
 ### 1. Collector (Extension Side Panel)
-* **AI Page Summarizer:** Summarizes any webpage with a hotkey (`Alt+Shift+S`).
-* **AI Visual Describer:** Describes the visual layout of a page with a hotkey (`Alt+Shift+D`).
+* **AI Page Summarizer:** Summarizes any webpage with a hotkey (`Ctrl+Shift+S`).
+* **AI Visual Describer:** Describes the visual layout of a page with a hotkey (`Ctrl+Shift+R`).
 * **AI Image Describer:** Right-click any image to get a detailed description.
 * **Save to Hub:** Save any summary or description to your private dashboard.
 
